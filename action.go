@@ -74,3 +74,7 @@ func (bt Test) Submit(sel interface{}, opts ...chromedp.QueryOption) Action {
 		fmt.Sprintf("[Submit] %v", sel),
 	}
 }
+
+func (bt Test) ActionFunc(f chromedp.ActionFunc, msg string) Action {
+	return Action{f, msg}
+}
