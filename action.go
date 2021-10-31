@@ -78,3 +78,23 @@ func (bt Test) Submit(sel interface{}, opts ...chromedp.QueryOption) Action {
 func (bt Test) ActionFunc(f chromedp.ActionFunc, msg string) Action {
 	return Action{f, msg}
 }
+
+func (bt Test) Poll(expression string, opts ...chromedp.PollOption) Action {
+	return Action{
+		chromedp.ActionFunc(func(ctx context.Context) error {
+			var result bool
+
+			if err := chromedp.Run(ctx, chromedp.Poll(expression, &result, opts...)); err != nil {
+				return err
+			}
+
+			if result == false {
+				// I don't think this should be possible
+				bt.Fatal("[Poll] Attempt to wait returned false")
+			}
+
+			return nil
+		}),
+		fmt.Sprintf("[Poll] %s", expression),
+	}
+}
