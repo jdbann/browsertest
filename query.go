@@ -40,7 +40,7 @@ func (bq Query) Contains(expected string) Action {
 			}
 
 			if strings.Contains(actual, expected) != bq.expectedResult {
-				return fmt.Errorf("expected %q to contain %q", expected, actual)
+				return fmt.Errorf("expected %q to contain %q", actual, expected)
 			}
 
 			return nil
