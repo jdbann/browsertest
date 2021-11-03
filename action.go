@@ -47,6 +47,13 @@ func (bt Test) Click(sel interface{}, opts ...chromedp.QueryOption) Action {
 	}
 }
 
+func (bt Test) WaitReady(sel interface{}, opts ...chromedp.QueryOption) Action {
+	return Action{
+		chromedp.WaitReady(sel, opts...),
+		fmt.Sprintf("[WaitReady] %v", sel),
+	}
+}
+
 func (bt Test) WaitVisible(sel interface{}, opts ...chromedp.QueryOption) Action {
 	return Action{
 		chromedp.WaitVisible(sel, opts...),
@@ -54,10 +61,31 @@ func (bt Test) WaitVisible(sel interface{}, opts ...chromedp.QueryOption) Action
 	}
 }
 
-func (bt Test) WaitReady(sel interface{}, opts ...chromedp.QueryOption) Action {
+func (bt Test) WaitNotVisible(sel interface{}, opts ...chromedp.QueryOption) Action {
 	return Action{
-		chromedp.WaitReady(sel, opts...),
-		fmt.Sprintf("[WaitReady] %v", sel),
+		chromedp.WaitNotVisible(sel, opts...),
+		fmt.Sprintf("[WaitNotVisible] %v", sel),
+	}
+}
+
+func (bt Test) WaitEnabled(sel interface{}, opts ...chromedp.QueryOption) Action {
+	return Action{
+		chromedp.WaitEnabled(sel, opts...),
+		fmt.Sprintf("[WaitEnabled] %v", sel),
+	}
+}
+
+func (bt Test) WaitSelected(sel interface{}, opts ...chromedp.QueryOption) Action {
+	return Action{
+		chromedp.WaitSelected(sel, opts...),
+		fmt.Sprintf("[WaitSelected] %v", sel),
+	}
+}
+
+func (bt Test) WaitNotPresent(sel interface{}, opts ...chromedp.QueryOption) Action {
+	return Action{
+		chromedp.WaitNotPresent(sel, opts...),
+		fmt.Sprintf("[WaitNotPresent] %v", sel),
 	}
 }
 
