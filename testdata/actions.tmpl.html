@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Actions Test</title>
+    <style type="text/css">
+      .is-hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <button data-action="show-hidden-message">Show Hidden Message</button>
+    <div data-target="hidden-message" class="is-hidden">
+      A hidden message!
+      <button data-action="hide-hidden-message">Hide Hidden Message</button>
+    </div>
+
+    <select data-target="enable-reset-select" data-action="enable-reset-select">
+      <option value="off" selected>Off</option>
+      <option value="on">On</option>
+    </select>
+
+    <button data-target="reset-select-button" data-action="reset-select" disabled>Reset select</button>
+
+    <button data-target="to-remove" data-action="remove">Remove this button</button>
+
+    <form method="POST" action="/actions">
+      <label for="value">Value</label>
+      <input type="text" name="value" id="value" />
+
+      <button type="submit">Submit value</button>
+    </form>
+
+    {{ with . }}
+    <p>The submitted value was: <span data-target="submitted-value">{{ . }}</span>.</p>
+    {{ end }}
+
+    <script>
+      // actions
+      showHiddenMessage = document.querySelector(`[data-action="show-hidden-message"]`);
+      hideHiddenMessage = document.querySelector(`[data-action="hide-hidden-message"]`);
+      enableResetSelect = document.querySelector(`[data-action="enable-reset-select"]`);
+      resetSelect = document.querySelector(`[data-action="reset-select"]`);
+      remove = document.querySelector(`[data-action="remove"]`);
+
+      // targets
+      hiddenMessage = document.querySelector(`[data-target="hidden-message"]`);
+      resetSelectButton = document.querySelector(`[data-target="reset-select-button"]`);
+      enableResetSelect = document.querySelector(`[data-target="enable-reset-select"]`);
+      toRemove = document.querySelector(`[data-target="to-remove"]`);
+
+      showHiddenMessage.addEventListener('click', event => {
+        hiddenMessage.classList.remove('is-hidden');
+      });
+
+      hideHiddenMessage.addEventListener('click', () => {
+        hiddenMessage.classList.add('is-hidden');
+      });
+
+      enableResetSelect.addEventListener('change', event => {
+        resetSelectButton.disabled = event.target.value == 'off';
+      });
+
+      resetSelect.addEventListener('click', () => {
+        enableResetSelect.value = 'off';
+      });
+
+      remove.addEventListener('click', event => {
+        toRemove.remove();
+      });
+    </script>
+  </body>
+</html>
