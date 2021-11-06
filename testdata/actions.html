@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Actions Test</title>
+    <style type="text/css">
+      .is-hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <button data-action="show-hidden-message">Show Hidden Message</button>
+    <div data-target="hidden-message" class="is-hidden">
+      A hidden message!
+      <button data-action="hide-hidden-message">Hide Hidden Message</button>
+    </div>
+
+    <script>
+      showButton = document.querySelector(`[data-action="show-hidden-message"]`);
+      hideButton = document.querySelector(`[data-action="hide-hidden-message"]`);
+      hiddenMessage = document.querySelector(`[data-target="hidden-message"]`);
+
+      showButton.addEventListener('click', () => {
+        hiddenMessage.classList.remove('is-hidden');
+      });
+
+      hideButton.addEventListener('click', () => {
+        hiddenMessage.classList.add('is-hidden');
+      });
+    </script>
+  </body>
+</html>
