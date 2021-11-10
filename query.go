@@ -79,3 +79,7 @@ func (bt Test) Text(sel interface{}, opts ...chromedp.QueryOption) Query {
 func (bt Test) InnerHTML(sel interface{}, opts ...chromedp.QueryOption) Query {
 	return newQuery(fmt.Sprintf("[InnerHTML] %q", sel), chromedp.InnerHTML, sel, opts...)
 }
+
+func (bt Test) Value(sel interface{}, opts ...chromedp.QueryOption) Query {
+	return newQuery(fmt.Sprintf("[Value] %q", sel), chromedp.Value, sel, opts...)
+}

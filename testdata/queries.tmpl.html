@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Queries Test</title>
+    <style type="text/css">
+      .is-hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="textEquals">A div containing text</div>
+
+    <div id="textContains"></div>
+
+    <div id="innerHTMLEquals">
+      <span class="is-hidden">A hidden message</span>
+    </div>
+
+    <div id="innerHTMLContains">
+      <p>
+        <strong><em>Important</em> messages</strong> here.
+      </p>
+    </div>
+
+    <input id="valueEquals" type="text" value="simple message" />
+
+    <input id="valueContains" type="text" />
+
+    <script>
+      randomString = () => (Math.random() + 1).toString(36).substring(7);
+
+      textContainsElement = document.querySelector(`#textContains`);
+      textContainsElement.innerHTML = `${randomString()}secretmessage${randomString()}`;
+
+      valueContainsElement = document.querySelector(`#valueContains`);
+      valueContainsElement.value = `${randomString()}codedmessage${randomString()}`;
+    </script>
+  </body>
+</html>
