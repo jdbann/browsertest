@@ -124,7 +124,7 @@ func (bt Test) Poll(expression string, opts ...chromedp.PollOption) Action {
 }
 
 type ActionWithTimeout struct {
-	BasicAction
+	Action
 	timeout time.Duration
 }
 
@@ -132,7 +132,7 @@ func (awt ActionWithTimeout) Timeout() time.Duration {
 	return awt.timeout
 }
 
-func (bt Test) WithTimeout(timeout time.Duration, action BasicAction) Action {
+func (bt Test) WithTimeout(timeout time.Duration, action Action) Action {
 	return ActionWithTimeout{
 		action,
 		timeout,
