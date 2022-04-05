@@ -32,7 +32,7 @@ func newQuery(msg string, query queryActionFunc, sel interface{}, opts ...chrome
 }
 
 func (bq Query) Contains(expected string) Action {
-	return Action{
+	return BasicAction{
 		chromedp.ActionFunc(func(ctx context.Context) error {
 			actual, err := bq.queryFunc(ctx)
 			if err != nil {
@@ -50,7 +50,7 @@ func (bq Query) Contains(expected string) Action {
 }
 
 func (bq Query) Equals(expected string) Action {
-	return Action{
+	return BasicAction{
 		chromedp.ActionFunc(func(ctx context.Context) error {
 			actual, err := bq.queryFunc(ctx)
 			if err != nil {
